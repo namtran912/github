@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 27, 2016 5:11:06 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="pojo.GroupChat" table="GroupChat" schema="dbo" catalog="ProjectFinal" optimistic-lock="version">
+        <id name="id" type="string">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="Name" not-null="true" />
+        </property>
+        <property name="message" type="string">
+            <column name="Message" />
+        </property>
+        <set name="members" table="MemberOfGroup" inverse="false" lazy="false" fetch="join">
+            <key>
+                <column name="GroupID" not-null="true" />
+            </key>
+            <many-to-many entity-name="pojo.Member">
+                <column name="Username" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

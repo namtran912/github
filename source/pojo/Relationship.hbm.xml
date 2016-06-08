@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 27, 2016 5:11:06 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="pojo.Relationship" table="Relationship" schema="dbo" catalog="ProjectFinal" optimistic-lock="version">
+        <composite-id name="id" class="pojo.RelationshipId">
+            <key-property name="username1" type="string">
+                <column name="Username_1" />
+            </key-property>
+            <key-property name="username2" type="string">
+                <column name="Username_2" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="memberByUsername1" class="pojo.Member" update="false" insert="false" fetch="join">
+            <column name="Username_1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="memberByUsername2" class="pojo.Member" update="false" insert="false" fetch="join">
+            <column name="Username_2" not-null="true" />
+        </many-to-one>
+        <property name="message" type="string">
+            <column name="Message" />
+        </property>
+    </class>
+</hibernate-mapping>

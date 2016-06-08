@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 27, 2016 5:11:06 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="pojo.Member" table="Member" schema="dbo" catalog="ProjectFinal" optimistic-lock="version">
+        <id name="username" type="string">
+            <column name="Username" />
+            <generator class="assigned" />
+        </id>
+        <property name="password" type="string">
+            <column name="Password" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="Status" not-null="true" />
+        </property>
+        <property name="profile" type="string">
+            <column name="Profile" />
+        </property>
+        <set name="relationshipsForUsername1" table="Relationship" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="Username_1" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Relationship" />
+        </set>
+        <set name="relationshipsForUsername2" table="Relationship" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="Username_2" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Relationship" />
+        </set>
+        <set name="groupChats" table="MemberOfGroup" inverse="false" lazy="false" fetch="join">
+            <key>
+                <column name="Username" not-null="true" />
+            </key>
+            <many-to-many entity-name="pojo.GroupChat">
+                <column name="GroupID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
